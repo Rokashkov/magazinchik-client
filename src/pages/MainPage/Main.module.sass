@@ -1,0 +1,48 @@
+.container
+	align-self: center
+	max-width: 1000px
+	width: 100%
+	padding: 40px
+	display: flex
+	flex-flow: column
+	gap: 40px
+
+	.group
+		display: flex
+		flex-flow: column
+		gap: 20px
+		padding: 20px
+		border-radius: 5px
+		background: var(--color-secondary)
+
+		p
+			font-weight: 600
+
+			span
+				font-weight: 400
+
+		.data
+			color: green
+			align-self: center
+
+		.error
+			color: red
+			align-self: center
+
+		.loading
+			align-self: center
+
+		button
+			align-self: center
+			height: 40px
+			padding: 0 16px
+			border-radius: 5px
+			color: var(--color-light)
+			background: var(--color-primary)
+			cursor: pointer
+
+			&:hover
+				background: var(--color-dark)
+
+			&:active
+				background: var(--color-primary)
