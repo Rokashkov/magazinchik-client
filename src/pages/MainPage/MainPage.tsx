@@ -1,6 +1,6 @@
 import { api } from '../../shared/api'
 import { useFetch } from '../../shared/lib/hooks/useFetch'
-import styles from './Main.module.sass'
+import styles from './MainPage.module.sass'
 import cn from 'classnames'
 
 export const MainPage = () => {
