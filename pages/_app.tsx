@@ -1,14 +1,16 @@
+import App, { AppContext, AppInitialProps } from 'next/app'
+import { globalStore } from 'shared/store/globalStore'
+import { MainLayout } from 'layouts/MainLayout'
+import { AppProps } from 'next/app'
+import { NextPageWithLayout } from 'shared/types/NextPageWithLayout'
+import { getSelectorsByUserAgent } from 'react-device-detect'
+import { Montserrat } from 'next/font/google'
+import cn from 'classnames'
 import React from 'react'
 import '../src/shared/styles/global.sass'
-import { AppProps } from 'next/app'
-import { Montserrat } from 'next/font/google'
-import { MainLayout } from '../src/layouts/MainLayout'
-import { globalStore } from 'shared/store'
-import { observer } from 'mobx-react-lite'
-import { isMobile } from 'react-device-detect'
 
 if (typeof window === 'undefined') {
-	React.useLayoutEffect = () => {}
+	React.useLayoutEffect = null
 }
 
 const montserrat = Montserrat({
@@ -16,14 +18,47 @@ const montserrat = Montserrat({
 	weight: []
 })
 
-const MyApp = observer(({ Component, pageProps }: AppProps<any>) => {
-	globalStore.setIsMobile(isMobile)
+interface ICustomAppProps {
+	isMobile: boolean
+}
+
+type AppPropsWithLayout = AppProps<ICustomAppProps | any> & {
+	Component: NextPageWithLayout
+}
+
+const CustomApp = ({ Component, pageProps }: AppPropsWithLayout) => {
+	const { isMobile, ...otherPageProps } = pageProps
+
+	if (typeof isMobile !== 'undefined') {
+		globalStore.setIsMobile(isMobile)
+	}
+
+	const Layout = Component.Layout ?? MainLayout
 
 	return (
-		<MainLayout className={ montserrat.className }>
-			<Component { ...pageProps }/>
-		</MainLayout>
+		<Layout className={ cn(montserrat.className) }>
+			<Component { ...otherPageProps }/>
+		</Layout>
 	)
-})
+}
 
-export default MyApp
+CustomApp.getInitialProps = async (appContext: AppContext): Promise<AppInitialProps<ICustomAppProps | any>> => {
+	const { pageProps } = await App.getInitialProps(appContext)
+
+	if (typeof window === 'undefined') {
+		const { ctx } = appContext
+		const userAgent = ctx.req.headers['user-agent']
+		const { isMobile } = getSelectorsByUserAgent(userAgent) as { isMobile: boolean }
+
+		return {
+			pageProps: {
+				...pageProps,
+				isMobile
+			}
+		}
+	}
+
+	return { pageProps }
+}
+
+export default CustomApp

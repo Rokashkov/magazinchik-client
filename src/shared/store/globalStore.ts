@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 
 class GlobalStore {
-	isMobile: boolean
+	isMobile: boolean = undefined
 
 	constructor () {
 		makeAutoObservable(this)

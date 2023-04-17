@@ -1,3 +1,3 @@
-import { ComponentProps } from 'react'
+import { ILayoutProps } from 'shared/types/ILayoutProps'
 
-export interface IMainLayoutProps extends ComponentProps<'div'> {}
+export interface IMainLayoutProps extends ILayoutProps {}
