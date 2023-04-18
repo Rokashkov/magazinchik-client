@@ -1,0 +1,37 @@
+.container
+	position: absolute
+	top: 0
+	left: 0
+	height: 100vh
+	width: 100vw
+	background: var(--color-light)
+	display: flex
+	align-items: center
+	justify-content: center
+		
+	.logo
+		animation: popup 0.3s ease-out, loading 1s ease-in 2s infinite
+		color: var(--color-primary)
+		height: 96px
+		width: 96px
+		filter: drop-shadow(2px 4px 2px rgba(0,	0, 0, 0.25))
+
+@keyframes popup
+	0%
+		transform: scale(0.5)
+
+	50%
+		transform: scale(1.25)
+		
+	100%
+		transform: scale(1)
+
+@keyframes loading
+	0%
+		color: var(--color-primary)
+
+	50%
+		color: var(--color-primary-25)
+		
+	100%
+		color: var(--color-primary)

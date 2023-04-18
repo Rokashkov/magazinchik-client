@@ -1,7 +1,8 @@
 import { makeAutoObservable } from 'mobx'
 
-class GlobalStore {
+class AppStore {
 	isMobile: boolean = undefined
+	isLaunched = false
 
 	constructor () {
 		makeAutoObservable(this)
@@ -10,6 +11,10 @@ class GlobalStore {
 	setIsMobile (value: boolean) {
 		this.isMobile = value
 	}
+
+	setLaunched () {
+		this.isLaunched = true
+	}
 }
 
-export const globalStore = new GlobalStore
+export const appStore = new AppStore

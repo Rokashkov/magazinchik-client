@@ -1,9 +1,9 @@
 import { observer } from 'mobx-react-lite'
-import { globalStore } from 'shared/store/globalStore'
+import { appStore } from 'shared/model/appStore'
 import { FooterMobile } from './FooterMobile'
 import { FooterDeckstop } from './FooterDeckstop'
 
 export const Footer = observer(() => {
 	
-	return globalStore.isMobile ? <FooterMobile/> : <FooterDeckstop/>
+	return appStore.isMobile ? <FooterMobile/> : <FooterDeckstop/>
 })

@@ -1,9 +1,9 @@
 import { observer } from 'mobx-react-lite'
-import { globalStore } from 'shared/store/globalStore'
+import { appStore } from 'shared/model/appStore'
 import { HeaderMobile } from './HeaderMobile'
 import { HeaderDeckstop } from './HeaderDeckstop'
 
 export const Header = observer(() => {
 	
-	return globalStore.isMobile ? <HeaderMobile/> : <HeaderDeckstop/>
+	return appStore.isMobile ? <HeaderMobile/> : <HeaderDeckstop/>
 })
