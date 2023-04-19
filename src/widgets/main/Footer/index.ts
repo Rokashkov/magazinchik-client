@@ -1,1 +1,0 @@
-export { Footer as MainFooter } from './Footer'

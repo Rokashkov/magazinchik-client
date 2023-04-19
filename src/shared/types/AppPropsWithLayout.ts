@@ -3,5 +3,5 @@ import { NextPageWithLayout } from './NextPageWithLayout'
 
 
 export type AppPropsWithLayout = AppProps & {
-	Component: NextPageWithLayout
+	Component: undefined | NextPageWithLayout
 }

@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
-import { ILayoutProps } from './ILayoutProps'
+import { LayoutProps } from './LayoutProps'
 
 export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
-	Layout?: (props: ILayoutProps) => JSX.Element
+	Layout?: (props: LayoutProps) => JSX.Element
 }

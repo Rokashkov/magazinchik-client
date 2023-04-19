@@ -1,1 +1,0 @@
-export { BrandedLaunchScreen } from './BrandedLaunchScreen'
