@@ -1,4 +1,4 @@
-import styles from './EmptyLayout.module.sass'
+import styles from './.module.sass'
 import cn from 'classnames'
 import { LayoutProps } from 'shared/types/LayoutProps'
 
