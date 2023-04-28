@@ -1,0 +1,77 @@
+@use '../../../shared/styles/variables' as v
+	
+.container
+	flex: 1
+	display: flex
+	flex-flow: column
+	align-items: center
+	justify-content: center
+	gap: 4px
+	padding: 12px 0 16px 0
+
+	.frame
+		width: 64px
+		height: 32px
+		border-radius: 8px
+
+		.state
+			display: flex
+			width: 100%
+			height: 100%
+			justify-content: center
+			align-items: center
+			border-radius: inherit
+
+			.icon
+				width: 24px
+				height: 24px
+				color: var(--on-surface-variant)
+
+	.text
+		font-weight: 500
+		font-size: 12px
+		line-height: 16px
+		color: var(--on-surface-variant)
+
+	&:hover
+		.state
+			background: var(--on-surface-variant-hovered)
+
+	&:active
+		.state
+			background: var(--on-surface-variant-pressed)
+
+	&:focus-visible
+		.state
+			background: var(--on-surface-variant-focused)
+
+	&.selected
+		.frame
+			background: var(--primary-container)
+
+			.icon
+				color: var(--on-primary-container)
+
+		&:hover
+			.state
+				background: var(--on-primary-container-hovered)
+
+		&:active
+			.state
+				background: var(--on-primary-container-pressed)
+
+		&:focus-visible
+			.state
+				background: var(--on-primary-container-focused)
+
+		.text
+			color: var(--on-surface)
+
+	@media (max-width: v.$small-max-width)
+		padding: 0
+
+		.frame
+			width: 48px
+
+		.text
+			display: none

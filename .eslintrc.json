@@ -40,12 +40,11 @@
 		"react/no-unescaped-entities": 0,
 		"react/react-in-jsx-scope": 0,
 		"react/jsx-no-useless-fragment": 0,
+		"react/button-has-type": 0,
+		"react/no-multi-comp": 0,
+		"react/function-component-definition": 0,
 		"react/destructuring-assignment": "warn",
-		"react/button-has-type": "warn",
 		"react/hook-use-state": "warn",
-		"react/function-component-definition": [1, {
-			"namedComponents": ["arrow-function", "function-declaration"]
-		}],
 		"react/jsx-boolean-value": [1, "never"],
 		"react/jsx-child-element-spacing": "warn",
 		"react/jsx-closing-bracket-location": [1, "line-aligned"],
@@ -105,7 +104,6 @@
 		"react/no-danger": "warn",
 		"react/no-danger-with-children": "warn",
 		"react/no-deprecated": "warn",
-		"react/no-multi-comp": "warn",
 		"react/no-this-in-sfc": "warn",
 		"react/no-unstable-nested-components": "warn",
 		"react/self-closing-comp": "warn"

@@ -1,0 +1,67 @@
+.container
+	height: 56px
+	border-radius: 16px
+
+	.frame
+		width: 100%
+		height: 100%
+		border-radius: inherit
+
+		.state
+			display: flex
+			width: 100%
+			height: 100%
+			align-items: center
+			padding: 0 24px 0 16px
+			border-radius: inherit
+
+			.group
+				display: flex
+				align-items: center
+				gap: 12px
+
+				.icon
+					width: 24px
+					height: 24px
+					color: var(--on-surface-variant)
+
+				.text
+					font-weight: 500
+					font-size: 14px
+					line-height: 20px
+					color: var(--on-surface-variant)
+
+	&:hover
+		.state
+			background: var(--on-surface-variant-hovered)
+
+	&:active
+		.state
+			background: var(--on-surface-variant-pressed)
+
+	&:focus-visible
+		.state
+			background: var(--on-surface-variant-focused)
+
+	&.selected
+		.frame
+			background: var(--primary-container)
+
+			.group
+				.icon
+					color: var(--on-primary-container)
+
+				.text
+					color: var(--on-surface)
+
+		&:hover
+			.state
+				background: var(--on-primary-container-hovered)
+
+		&:active
+			.state
+				background: var(--on-primary-container-pressed)
+
+		&:focus-visible
+			.state
+				background: var(--on-primary-container-focused)
