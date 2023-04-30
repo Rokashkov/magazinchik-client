@@ -10,6 +10,8 @@ import { useWindowResize } from 'shared/lib/hooks/useWindowResize'
 import cn from 'classnames'
 import '../src/shared/styles/global.sass'
 import 'normalize.css'
+import { useFetch } from 'shared/lib/hooks/useFetch'
+import { authService } from 'shared/api/authService'
 
 if (typeof window === 'undefined') {
 	React.useLayoutEffect = null
@@ -35,6 +37,25 @@ const App = observer(({ Component, pageProps, router }: AppPropsWithLayout) => {
 			globalStore.setPath(router.asPath)
 		}
 	})
+
+	const { fetch } = useFetch(
+		() => authService.refresh(),
+		({ data }) => {
+			console.log(data)
+			globalStore.setSnackbarMessage('Вы успешно вошли')
+			const { accessToken, user } = data
+			localStorage.setItem('accessToken', accessToken)
+			globalStore.setUser(user)
+		},
+		(error) => {
+			console.log(error)
+			globalStore.setSnackbarMessage('Вы не авторизованы')
+		}
+	)
+
+	useEffect(() => {
+		fetch()
+	}, [])
 
 	return (
 		<Layout className={ cn(montserrat.className) }>

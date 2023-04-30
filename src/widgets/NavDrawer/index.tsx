@@ -3,11 +3,10 @@ import cn from 'classnames'
 import { ComponentProps, TouchEventHandler, useRef, useState } from 'react'
 import {
 	IoHome, IoHomeOutline, IoCube, IoCubeOutline, IoHeart,
-	IoHeartOutline, IoBag, IoBagOutline, IoPerson, IoPersonOutline, IoLogIn, IoLogInOutline, IoPersonAdd, IoPersonAddOutline
+	IoHeartOutline, IoBag, IoBagOutline, IoPerson, IoPersonOutline, IoLogIn, IoLogInOutline, IoPersonAdd, IoPersonAddOutline, IoLogOutOutline, IoLogOut
 } from 'react-icons/io5'
 import { Item } from './Item'
 import { Headline } from './Headline'
-import { Divider } from './Divider'
 import { observer } from 'mobx-react-lite'
 import { globalStore } from 'shared/model'
 import { CSSTransition } from 'react-transition-group'
@@ -55,58 +54,71 @@ export const NavDrawer = observer(({ ...otherProps }: NavDrawerProps) => {
 				onTouchMove={ handleTouchMove }
 				onTouchEnd={ handleTouchEnd }
 			>
-				<Headline>Навигация</Headline>
-				<Item
-					iconOutline={ IoHomeOutline }
-					iconFilled={ IoHome }
-					href='/'
-				>
-					Главная
-				</Item>
-				<Item
-					iconOutline={ IoCubeOutline }
-					iconFilled={ IoCube }
-					href='/orders'
-				>
-					Заказы
-				</Item>
-				<Item
-					iconOutline={ IoHeartOutline }
-					iconFilled={ IoHeart }
-					href='/favorites'
-				>
-					Любимое
-				</Item>
-				<Item
-					iconOutline={ IoBagOutline }
-					iconFilled={ IoBag }
-					href='/cart'
-				>
-					Корзина
-				</Item>
-				<Item
-					iconOutline={ IoPersonOutline }
-					iconFilled={ IoPerson }
-					href='/profile'
-				>
-					Профиль
-				</Item>
-				<Divider/>
-				<Headline>Действия</Headline>
-				<Item
-					iconOutline={ IoLogInOutline }
-					iconFilled={ IoLogIn }
-					href='/login'
-				>
-					Вход
-				</Item>
-				<Item
-					iconOutline={ IoPersonAddOutline }
-					iconFilled={ IoPersonAdd }
-					href='/register'
-				>
-					Регистрация
-				</Item>
+				<Headline>Магазинчик</Headline>
+				<div className={ cn(styles.group) }>
+					<Item
+						iconOutline={ IoHomeOutline }
+						iconFilled={ IoHome }
+						href='/'
+					>
+						Главная
+					</Item>
+					<Item
+						iconOutline={ IoCubeOutline }
+						iconFilled={ IoCube }
+						href='/orders'
+					>
+						Заказы
+					</Item>
+					<Item
+						iconOutline={ IoHeartOutline }
+						iconFilled={ IoHeart }
+						href='/favorites'
+					>
+						Любимое
+					</Item>
+					<Item
+						iconOutline={ IoBagOutline }
+						iconFilled={ IoBag }
+						href='/cart'
+					>
+						Корзина
+					</Item>
+					<Item
+						iconOutline={ IoPersonOutline }
+						iconFilled={ IoPerson }
+						href='/profile'
+					>
+						Профиль
+					</Item>
+				</div>
+				{ !globalStore.user.id && (
+					<>
+						<Item
+							iconOutline={ IoLogInOutline }
+							iconFilled={ IoLogIn }
+							href='/login'
+						>
+							Вход
+						</Item>
+						<Item
+							iconOutline={ IoPersonAddOutline }
+							iconFilled={ IoPersonAdd }
+							href='/register'
+						>
+							Регистрация
+						</Item>
+					</>
+				) }
+				{ globalStore.user.id && (
+					<Item
+						iconOutline={ IoLogOutOutline }
+						iconFilled={ IoLogOut }
+						href='/logout'
+					>
+						Выйти
+					</Item>	
+				) }
 			</nav>
 		</CSSTransition>
 	)

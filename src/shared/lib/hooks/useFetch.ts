@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react'
 export function useFetch<T = any> (
 	fetchCallback: () => Promise<AxiosResponse<T>>,
 	thenCallback?: (response: AxiosResponse<T>) => void,
-	catchCallback?: (error: AxiosError) => void
+	catchCallback?: (error: AxiosError<{ errorMessage: string }>) => void
 ) {
 	const [isFetching, setIsFetching] = useState(false)
 	const [data, setData] = useState<T>()
-	const [error, setError] = useState<AxiosError>()
+	const [error, setError] = useState<AxiosError<{ errorMessage: string }>>()
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
 	const fetch = () => {
@@ -27,7 +27,7 @@ export function useFetch<T = any> (
 					setData(response.data)
 					thenCallback && thenCallback(response)
 				})
-				.catch((error: AxiosError) => {
+				.catch((error: AxiosError<{ errorMessage: string }>) => {
 					setError(undefined)
 					setError(error)
 					catchCallback && catchCallback(error)

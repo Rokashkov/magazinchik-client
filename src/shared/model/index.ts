@@ -2,12 +2,20 @@ import { makeAutoObservable } from 'mobx'
 
 type DeviceType = 'mobile' | 'tablet' | 'desktop'
 
+interface User {
+	id: number
+	name: string
+	email: string
+}
+
 class GlobalStore {
 	path: string = undefined
 	isScrimVisible = false
+	snackbarMessage = ''
 	isNavDrawerVisible = false
 	windowWidth: number = undefined
 	deviceType: DeviceType = undefined
+	user: User = {} as User
 
 	constructor () {
 		makeAutoObservable(this)
@@ -48,6 +56,14 @@ class GlobalStore {
 	
 	setDeviceType (deviceType: DeviceType) {
 		this.deviceType = deviceType
+	}
+
+	setSnackbarMessage (message: string) {
+		this.snackbarMessage = message
+	}
+
+	setUser (user: User) {
+		this.user = user
 	}
 }
 

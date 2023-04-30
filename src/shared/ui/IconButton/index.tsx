@@ -7,9 +7,10 @@ interface IconButtonProps extends Omit<ComponentProps<'button'>, 'children'> {
 	iconOutline: IconType
 	iconFilled?: IconType
 	selected?: true
+	placedOn?: 'surface' | 'inverse-surface'
 }
 
-export const IconButton = ({ iconOutline, iconFilled, type, selected, ...otherProps }: IconButtonProps) => {
+export const IconButton = ({ placedOn, iconOutline, iconFilled, type, selected, className, ...otherProps }: IconButtonProps) => {
 	const IconOutline = iconOutline
 	const IconFilled = iconFilled
 	
@@ -17,8 +18,10 @@ export const IconButton = ({ iconOutline, iconFilled, type, selected, ...otherPr
 		<button
 			type={  type || 'button' }
 			className={ cn(
+				className,
 				styles.container,
-				styles[selected && 'selected']
+				styles[selected && 'selected'],
+				styles[placedOn === 'inverse-surface' && 'on-inverse-surface']
 			) }
 			{ ...otherProps }
 		>

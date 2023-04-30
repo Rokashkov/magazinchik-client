@@ -31,6 +31,23 @@
 		.state
 			background: var(--on-surface-variant-focused)
 
+	&.on-inverse-surface
+		.icon
+			color: var(--on-inverse-surface)
+
+		&:hover
+			.state
+				background: var(--on-inverse-surface-hovered)
+
+		&:active
+			.state
+				background: var(--on-inverse-surface-pressed)
+
+		&:focus-visible
+			.state
+				background: var(--on-inverse-surface-focused)
+		
+
 	&.selected
 		.icon
 			color: var(--primary)

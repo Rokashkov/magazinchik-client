@@ -18,7 +18,7 @@ export const NotFoundPage = () => {
 				/>
 				<div className={ cn(styles.headline) }>Ч</div>
 			</div>
-			<div className={ cn(styles.message) }>Похоже, то, что вы искали, бесследно исчезло или вовсе не существвало...</div>
+			<div className={ cn(styles.message) }>Похоже, то, что вы искали, бесследно исчезло или вовсе не существовало...</div>
 		</div>
 	)
 }
