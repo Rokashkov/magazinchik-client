@@ -1,0 +1,21 @@
+@use '../../../../styles/variables' as v
+	
+.container
+	display: flex
+	justify-content: center
+	align-items: center
+	width: 100%
+	max-width: var(--content-max-width)
+	background: var(--surface-container-lowest)
+
+	@media (min-width: v.$desktop-min-width)
+		padding: 32px 24px
+
+	@media (min-width: v.$tablet-min-width) and (max-width: v.$tablet-max-width)
+		padding: 32px 24px
+
+	@media (min-width: v.$mobile-min-width) and (max-width: v.$mobile-max-width)
+		padding: 32px 16px
+
+	@media (max-width: v.$small-max-width)
+		padding: 32px 16px

@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
-import { globalStore } from 'shared/model'
+import { store } from 'shared/model'
 
 export const useWindowResize = () => {
 	const resizeHandler = () => {
-		globalStore.setWindowWidth(window.innerWidth)
+		store.setWindowWidth(window.innerWidth)
 	}
 
 	useEffect(() => {

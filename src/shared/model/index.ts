@@ -2,20 +2,13 @@ import { makeAutoObservable } from 'mobx'
 
 type DeviceType = 'mobile' | 'tablet' | 'desktop'
 
-interface User {
-	id: number
-	name: string
-	email: string
-}
-
-class GlobalStore {
+class Store {
 	path: string = undefined
+	snackbarMessage: string = undefined
 	isScrimVisible = false
-	snackbarMessage = ''
 	isNavDrawerVisible = false
 	windowWidth: number = undefined
 	deviceType: DeviceType = undefined
-	user: User = {} as User
 
 	constructor () {
 		makeAutoObservable(this)
@@ -61,10 +54,6 @@ class GlobalStore {
 	setSnackbarMessage (message: string) {
 		this.snackbarMessage = message
 	}
-
-	setUser (user: User) {
-		this.user = user
-	}
 }
 
-export const globalStore = new GlobalStore
+export const store = new Store

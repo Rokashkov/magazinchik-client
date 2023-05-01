@@ -1,0 +1,26 @@
+@use '../../../../styles/variables' as v
+	
+.container
+	z-index: var(--top-app-bar-z-index)
+	position: fixed
+	top: 0
+	left: 0
+	display: flex
+	align-items: center
+	padding: 0 4px
+	width: 100vw
+	height: var(--top-app-bar-height)
+	box-shadow: var(--elevation-medium)
+	background: var(--surface-container)
+
+	@media (min-width: v.$desktop-min-width)
+		display: none
+
+	@media (min-width: v.$tablet-min-width) and (max-width: v.$tablet-max-width)
+		display: none
+
+	@media (min-width: v.$mobile-min-width) and (max-width: v.$mobile-max-width)
+		display: flex
+
+	@media (max-width: v.$small-max-width)
+		display: flex

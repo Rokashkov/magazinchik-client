@@ -1,12 +1,12 @@
 import styles from './.module.sass'
 import cn from 'classnames'
-import { LoginForm } from 'widgets/auth/LoginForm'
+import { LoginWindowWidget } from 'widgets/auth/LoginWindowWidget'
 
 export const LoginPage = () => {
 	
 	return (
 		<div className={ cn(styles.container) }>
-			<LoginForm/>
+			<LoginWindowWidget/>
 		</div>
 	)
 }

@@ -1,3 +1,3 @@
-export default function () {
-	return <div>Страница профиля</div>
-}
+import { ProfilePage } from 'pages/user/ProfilePage'
+
+export default ProfilePage
