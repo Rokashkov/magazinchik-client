@@ -1,5 +1,4 @@
 import Layout, { LayoutProps } from 'shared/ui/containers/Layout'
-import { Snackbar } from 'shared/ui/modal/Snackbar'
 import { DefaultFooter } from 'widgets/default/DefaultFooter'
 import { DefaultMain } from 'widgets/default/DefaultMain'
 import { DefaultNavBar } from 'widgets/default/DefaultNavBar'
@@ -19,7 +18,6 @@ export const DefaultLayout = ({ children, ...otherProps }: LayoutProps) => {
 				{ children }
 			</DefaultMain>
 			<DefaultFooter/>
-			<Snackbar/>
 		</Layout>
 	)
 }

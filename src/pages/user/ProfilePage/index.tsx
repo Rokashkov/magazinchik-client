@@ -1,9 +1,10 @@
 import { userStore } from 'entites/user/model'
 import { observer } from 'mobx-react-lite'
+import { Page } from 'shared/ui/containers/Page'
 
 export const ProfilePage = observer(() => {
 	
 	return (
-		<div>Добро пожаловать, { userStore.user.name ?? 'незнакомец' }</div>
+		<Page>Добро пожаловать, { userStore.user.name ?? 'незнакомец' }</Page>
 	)
 })

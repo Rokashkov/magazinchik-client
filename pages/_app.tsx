@@ -14,6 +14,8 @@ import { authService } from 'features/auth/api'
 import { DefaultLayout } from 'layouts/default/DefaultLayout'
 import { authStore } from 'entites/auth/model'
 import { userStore } from 'entites/user/model'
+import { Router } from 'next/router'
+import { AnimatePresence } from 'framer-motion'
 
 if (typeof window === 'undefined') {
 	React.useLayoutEffect = null
@@ -29,8 +31,21 @@ const App = observer(({ Component, pageProps, router }: AppPropsWithLayout) => {
 
 	const { fetch, data, error } = useFetch({ requestHandler: () => authService.refresh() })
 
+	const start = () => store.setIsPageLoading(true)
+	const end = () => store.setIsPageLoading(false)
+
 	useEffect(() => {
 		fetch()
+
+		Router.events.on('routeChangeStart', start)
+		Router.events.on('routeChangeComplete', end)
+		Router.events.on('routeChangeError', end)
+
+		return () => {
+			Router.events.off('routeChangeStart', start)
+			Router.events.off('routeChangeComplete', end)
+			Router.events.off('routeChangeError', end)
+		}
 	}, [])
 
 	useEffect(() => {
@@ -62,9 +77,14 @@ const App = observer(({ Component, pageProps, router }: AppPropsWithLayout) => {
 	})
 
 	return (
-		<Layout className={ cn(montserrat.className) }>
-			<Component { ...pageProps }/>
-		</Layout>
+		<AnimatePresence
+			mode="wait"
+			initial={ false }
+		>
+			<Layout className={ cn(montserrat.className) }>
+				<Component { ...pageProps }/>
+			</Layout>
+		</AnimatePresence>
 	)
 })
 

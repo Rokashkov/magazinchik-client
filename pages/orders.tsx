@@ -1,3 +1,3 @@
-export default function () {
-	return <div>Страница заказов</div>
-}
+import { OrdersPage } from 'pages/order/OrdersPage'
+
+export default OrdersPage

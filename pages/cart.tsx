@@ -1,3 +1,3 @@
-export default function () {
-	return <div>Страница корзины</div>
-}
+import { CartPage } from 'pages/cart/CartPage'
+
+export default CartPage

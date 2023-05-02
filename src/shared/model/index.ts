@@ -9,6 +9,7 @@ class Store {
 	isNavDrawerVisible = false
 	windowWidth: number = undefined
 	deviceType: DeviceType = undefined
+	isPageLoading = false
 
 	constructor () {
 		makeAutoObservable(this)
@@ -53,6 +54,9 @@ class Store {
 
 	setSnackbarMessage (message: string) {
 		this.snackbarMessage = message
+	}
+	setIsPageLoading (value: boolean) {
+		this.isPageLoading = value
 	}
 }
 

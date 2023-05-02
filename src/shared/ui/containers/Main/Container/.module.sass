@@ -7,6 +7,10 @@
 	width: 100%
 	max-width: var(--content-max-width)
 	background: var(--surface-container-lowest)
+	transition: opacity 0.2s ease-out
+
+	&.loading
+		opacity: 0
 
 	@media (min-width: v.$desktop-min-width)
 		padding: 32px 24px

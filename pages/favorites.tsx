@@ -1,3 +1,3 @@
-export default function () {
-	return <div>Страница любимых товаров</div>
-}
+import { FavoritesPage } from 'pages/favorite/FavoritesPage'
+
+export default FavoritesPage

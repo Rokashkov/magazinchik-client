@@ -28,21 +28,22 @@
 		opacity: 0
 
 	@media (min-width: v.$desktop-min-width)
-		width: 600px
+		width: 640px
 		bottom: 12px
-		right: 24px
+		right: calc(24px + var(--nav-drawer-width))
 
 	@media (min-width: v.$tablet-min-width) and (max-width: v.$tablet-max-width)
-		width: 500px
+		width: calc(100% - 24px * 2 - var(--nav-rail-width))
+		max-width: 640px
 		bottom: 12px
 		right: 24px
 
 	@media (min-width: v.$mobile-min-width) and (max-width: v.$mobile-max-width)
-		width: 400px
+		width: calc(100% - 16px * 2)
 		bottom: calc(12px + var(--nav-bar-heigth))
 		right: 16px
 
 	@media (max-width: v.$small-max-width)
-		width: 300px
+		width: calc(100% - 16px * 2)
 		bottom: calc(12px + var(--small-nav-bar-heigth))
 		right: 16px
