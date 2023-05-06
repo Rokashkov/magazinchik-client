@@ -6,13 +6,13 @@ export const Page = ({ children, className,...otherProps }: Parameters<typeof Mo
 
 	return (
 		<Motion.div
-			initial={ { x: 300, opacity: 0 } }
+			initial={ { x: 100, opacity: 0 } }
 			animate={ { x: 0, opacity: 1 } }
-			exit={ { x: 300, opacity: 0 } }
+			exit={ { x: 100, opacity: 0 } }
 			className={ cn(styles.container, className) }
 			transition={ {
 				type: 'spring',
-				stiffness: 260,
+				stiffness: 100,
 				damping: 20,
 			} }
 			{ ...otherProps }

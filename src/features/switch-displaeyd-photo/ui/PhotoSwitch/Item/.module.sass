@@ -1,0 +1,28 @@
+.container
+	border-radius: 4px
+	cursor: pointer
+	display: flex
+
+	@media (min-width: 1000px)
+		outline: 1px solid var(--outline-variant)
+		outline-offset: -1px
+
+		&.selected
+			outline: 2px solid var(--primary)
+			outline-offset: -2px
+
+		&:hover:not(.selected)
+			outline: 1px solid var(--on-surface)
+
+	@media (max-width: 999px)
+		width: 8px
+		height: 8px
+		background: var(--outline-variant)
+
+		&.selected
+			width: 16px
+			background: var(--primary)
+
+		.photo
+			display: none
+			

@@ -9,6 +9,7 @@ export const LogoutNavDrawerAction = () => {
 	const { fetch, isLoading } = useFetch(
 		() => authService.logout(),
 		() => {},
+		() => {},
 		() => window.location.href = '/'
 	)
 

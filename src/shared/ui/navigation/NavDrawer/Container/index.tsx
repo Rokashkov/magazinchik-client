@@ -14,6 +14,7 @@ export const Container = observer(({ children, className, ...otherProps }: Conta
 
 	const handleTouchStart: TouchEventHandler = (e) => {
 		setTouchStart(e.targetTouches[0].clientX)
+		setTouchEnd(e.targetTouches[0].clientX)
 	}
 
 	const handleTouchMove: TouchEventHandler = (e) => {

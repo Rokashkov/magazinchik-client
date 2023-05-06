@@ -1,0 +1,27 @@
+.photo
+	object-fit: contain
+
+.placeholder
+	background: var(--surface-container)
+	
+	@media (min-width: 1000px)
+		max-height: 480px
+		height: calc((100vw - var(--nav-rail-width) - 24px * 2 - 400px) * 0.75)
+
+.photo, .placeholder
+	border-radius: 4px
+	align-self: flex-start
+
+	@media (min-width: 1000px)
+		max-width: 640px
+		width: calc(100vw - var(--nav-rail-width) - 24px * 2 - 400px)
+
+	@media (max-width: 999px) and (min-width: 600px)
+		max-width: 100%
+		width: calc(100vw - var(--nav-rail-width) - 24px * 2)
+		height: calc((100vw - var(--nav-rail-width) - 24px * 2) * 0.75)
+		
+	@media (max-width: 600px)
+		max-width: 100%
+		width: calc(100vw - 16px * 2)
+		height: calc((100vw - 16px * 2) * 0.75)
