@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import { Page } from 'shared/ui/containers/Page'
+import { Page } from 'shared/ui/other/Page'
 
 export const FavoritesPage = observer(() => {
 	

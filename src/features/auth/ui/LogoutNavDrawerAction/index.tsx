@@ -1,19 +1,20 @@
-import { authService } from 'features/auth/api'
+import { authStore } from 'features/auth/store'
+import { useEffect } from 'react'
 import { IoLogOutOutline } from 'react-icons/io5'
-import { FinallyHandler, RequestHandler, useFetch } from 'shared/lib/hooks/useFetch'
+import { authService } from 'shared/api/sevices/authService'
+import { useFetch } from 'shared/lib/hooks/useFetch'
 import NavDrawer from 'shared/ui/navigation/NavDrawer'
 
 export const LogoutNavDrawerAction = () => {
-	const requestHandler: RequestHandler = () => authService.logout()
-	const finallyHandler: FinallyHandler = () => {
-		localStorage.removeItem('accessToken')
-		window.location.href = '/login'
-	}
+	const { fetch, isLoading } = useFetch(
+		() => authService.logout(),
+		() => {},
+		() => window.location.href = '/'
+	)
 
-	const { fetch } = useFetch({
-		requestHandler,
-		finallyHandler
-	})
+	useEffect(() => {
+		authStore.setIsLoading(isLoading)
+	}, [isLoading])
 	
 	return (
 		<NavDrawer.Action

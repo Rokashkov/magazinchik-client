@@ -1,0 +1,28 @@
+@use '../../../../styles/variables' as v
+
+.container
+	z-index: var(--layout-z-index)
+	position: relative
+	display: flex
+	flex-flow: column
+	align-items: center
+	width: 100%
+	max-width: 100vw
+	overflow-x: hidden
+	min-height: 100vh
+	background: var(--surface-container-lowest)
+	color: var(--on-surface-variant)
+
+	@media (min-width: v.$desktop-min-width)
+		padding-left: var(--nav-rail-width)
+
+	@media (min-width: v.$tablet-min-width) and (max-width: v.$tablet-max-width)
+		padding-left: var(--nav-rail-width)
+
+	@media (min-width: v.$mobile-min-width) and (max-width: v.$mobile-max-width)
+		padding-bottom: var(--nav-bar-heigth)
+		padding-top: var(--top-app-bar-height)
+
+	@media (max-width: v.$small-max-width)
+		padding-bottom: var(--small-nav-bar-heigth)
+		padding-top: var(--top-app-bar-height)

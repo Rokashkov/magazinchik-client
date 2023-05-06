@@ -1,5 +1,6 @@
 import { AxiosError, AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
+import { store } from 'shared/model/store'
 
 type RequestHandler<D = any> = () => Promise<AxiosResponse<D>>
 type ThenHandler<D = any> = (response: AxiosResponse<D>) => void
@@ -18,9 +19,12 @@ interface ErrorData {
 	message: string
 }
 
-function useFetch<D = any, E = ErrorData> (handlers: UseFetchOptions<D, E>) {
-	const { requestHandler, thenHandler, catchHandler, finallyHandler } = handlers
-
+function useFetch<D = any, E = ErrorData> (
+	requestHandler: RequestHandler<D>,
+	thenHandler?: ThenHandler<D>,
+	catchHandler?: CatchHandler<E>,
+	finallyHandler?: FinallyHandler
+) {
 	const [isFetching, setIsFetching] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
 	const [data, setData] = useState<D>()
@@ -30,6 +34,8 @@ function useFetch<D = any, E = ErrorData> (handlers: UseFetchOptions<D, E>) {
 
 	useEffect(() => {
 		if (isFetching && !isLoading) {
+			store.setSnackbarMessage('')
+			store.setIsSnackbarLoading(true)
 			setData(undefined)
 			setError(undefined)
 			setIsLoading(true)
@@ -44,6 +50,7 @@ function useFetch<D = any, E = ErrorData> (handlers: UseFetchOptions<D, E>) {
 					catchHandler && catchHandler(error)
 				})
 				.finally(() => {
+					store.setIsSnackbarLoading(false)
 					setIsLoading(false)
 					setIsFetching(false)
 					finallyHandler && finallyHandler()

@@ -1,4 +1,4 @@
-import { authStore } from 'entites/auth/model'
+import { authStore } from 'features/auth/store'
 import { PasswordField, PasswordFieldProps } from 'shared/ui/fields/PasswordField'
 
 type AuthPasswordFieldProps = Omit<PasswordFieldProps, 'placeholder'>

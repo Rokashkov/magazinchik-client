@@ -1,25 +1,28 @@
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios'
-import { authStore } from 'entites/auth/model'
-import { userStore } from 'entites/user/model'
-import { AuthResponse } from 'features/auth/api'
+import { AxiosError } from 'axios'
+import { authStore } from 'features/auth/store'
+import { Auth } from './types/Auth'
+import { userStore } from 'entities/user'
 
 const api = axios.create({
 	baseURL: process.env.NEXT_PUBLIC_API_URL,
 	withCredentials: true
 })
 
-api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+const reqOnFullfilled = async (config: InternalAxiosRequestConfig): Promise<InternalAxiosRequestConfig> => {
 	config.headers.Authorization = `Bearer ${ authStore.accessToken ?? '' }`
 
 	return config
-})
+}
 
-api.interceptors.response.use((response: AxiosResponse) => response, async (error: any) => {
-	const interceptedRequest = error.config
+const resOnFullfield = async (response: AxiosResponse): Promise<AxiosResponse> => response
+
+const resOnRejected = async (error: AxiosError): Promise<AxiosResponse> => {
+	const interceptedRequest = error.config as typeof error.config & { isRetry: boolean }
 	
 	if (error.response.status === 401 && interceptedRequest.isRetry !== true) {
 		interceptedRequest.isRetry = true
-		const response = await axios.get<AuthResponse>(`${ process.env.NEXT_PUBLIC_API_URL }/refresh`, { withCredentials: true })
+		const response = await axios.get<Auth>(`${ process.env.NEXT_PUBLIC_API_URL }/refresh`, { withCredentials: true })
 		const { accessToken, user } = response.data
 		authStore.setIsAuth(true)
 		authStore.setAccessToken(accessToken)
@@ -29,6 +32,15 @@ api.interceptors.response.use((response: AxiosResponse) => response, async (erro
 	} else {
 		throw error
 	}
+}
+
+api.interceptors.request.use(reqOnFullfilled)
+
+api.interceptors.response.use(resOnFullfield, resOnRejected)
+
+const clearApi = axios.create({
+	baseURL: process.env.NEXT_PUBLIC_API_URL,
+	withCredentials: true
 })
 
-export { api }
+export { api, clearApi }

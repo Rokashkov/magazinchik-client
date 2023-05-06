@@ -2,20 +2,20 @@ import { AppPropsWithLayout } from 'shared/types/AppPropsWithLayout'
 import React, { useEffect } from 'react'
 import { Montserrat_Alternates } from 'next/font/google'
 import { observer } from 'mobx-react-lite'
-import { store } from 'shared/model'
+import { store } from 'shared/model/store'
 import { initDeviceType } from 'shared/lib/hooks/initDeviceType'
 import { useBeforeMount } from 'shared/lib/hooks/useBeforeMount'
 import { useWindowResize } from 'shared/lib/hooks/useWindowResize'
+import { useFetch } from 'shared/lib/hooks/useFetch'
+import { DefaultLayout } from 'layouts/DefaultLayout/ui'
+import { Router } from 'next/router'
+import { AnimatePresence } from 'framer-motion'
 import cn from 'classnames'
 import '../src/shared/styles/global.sass'
 import 'normalize.css'
-import { useFetch } from 'shared/lib/hooks/useFetch'
-import { authService } from 'features/auth/api'
-import { DefaultLayout } from 'layouts/default/DefaultLayout'
-import { authStore } from 'entites/auth/model'
-import { userStore } from 'entites/user/model'
-import { Router } from 'next/router'
-import { AnimatePresence } from 'framer-motion'
+import { userStore } from 'entities/user'
+import { authService } from 'shared/api/sevices/authService'
+import { authStore } from 'features/auth'
 
 if (typeof window === 'undefined') {
 	React.useLayoutEffect = null
@@ -28,11 +28,15 @@ const montserrat = Montserrat_Alternates({
 
 const App = observer(({ Component, pageProps, router }: AppPropsWithLayout) => {
 	const Layout = Component.Layout ?? DefaultLayout
-
-	const { fetch, data, error } = useFetch({ requestHandler: () => authService.refresh() })
-
+	const { fetch, data, error } = useFetch(() => authService.refresh())
 	const start = () => store.setIsPageLoading(true)
 	const end = () => store.setIsPageLoading(false)
+
+	useBeforeMount(() => store.setPath(router.asPath))
+
+	initDeviceType()
+
+	useWindowResize()
 
 	useEffect(() => {
 		fetch()
@@ -49,6 +53,12 @@ const App = observer(({ Component, pageProps, router }: AppPropsWithLayout) => {
 	}, [])
 
 	useEffect(() => {
+		if (store.path !== router.asPath) {
+			store.setPath(router.asPath)
+		}
+	})
+
+	useEffect(() => {
 		if (error) {
 			store.setSnackbarMessage(`Не удалось автоматически авторизоваться: ${ error.message }`)
 		}
@@ -63,24 +73,8 @@ const App = observer(({ Component, pageProps, router }: AppPropsWithLayout) => {
 		}
 	}, [data])
 
-	initDeviceType()
-
-	useWindowResize()
-
-	useBeforeMount(() => store.setPath(router.asPath))
-
-	useEffect(() => {
-		if (store.path !== router.asPath) {
-			
-			store.setPath(router.asPath)
-		}
-	})
-
 	return (
-		<AnimatePresence
-			mode="wait"
-			initial={ false }
-		>
+		<AnimatePresence initial={ false }>
 			<Layout className={ cn(montserrat.className) }>
 				<Component { ...pageProps }/>
 			</Layout>

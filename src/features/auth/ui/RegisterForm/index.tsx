@@ -1,27 +1,26 @@
-import { authStore } from 'entites/auth/model'
-import { authService } from 'features/auth/api'
+import { authStore } from 'features/auth/store'
+import { authService } from 'shared/api/sevices/authService'
 import { observer } from 'mobx-react-lite'
 import { useEffect } from 'react'
 import { useFetch } from 'shared/lib/hooks/useFetch'
-import { store } from 'shared/model'
-import Form, { FormProps } from 'shared/ui/containers/Form'
+import { store } from 'shared/model/store'
+import Form, { FormProps } from 'shared/ui/other/Form'
 
 export const RegisterForm = observer(({ children, ...otherProps }: FormProps) => {
 	const { name, email, password } = authStore
-
-	const { fetch, data, error } = useFetch({ requestHandler: () => authService.register({ name, email, password }) })
+	const { fetch, data, error, isLoading } = useFetch(() => authService.register({ name, email, password }))
 
 	useEffect(() => {
-		if (error) {
-			store.setSnackbarMessage(error.message)
-		}
+		data && (window.location.href = '/')
+	}, [data])
+
+	useEffect(() => {
+		error && store.setSnackbarMessage(error.message)
 	}, [error])
 
 	useEffect(() => {
-		if (data) {
-			window.location.href = '/'
-		}
-	}, [data])
+		authStore.setIsLoading(isLoading)
+	}, [isLoading])
 	
 	return (
 		<Form

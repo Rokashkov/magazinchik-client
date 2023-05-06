@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
-import { store } from 'shared/model'
+import { store } from 'shared/model/store'
 
 export const useWindowResize = () => {
 	const resizeHandler = () => {
-		store.setWindowWidth(window.innerWidth)
+		store.setDeviceType(window.innerWidth)
 	}
 
 	useEffect(() => {

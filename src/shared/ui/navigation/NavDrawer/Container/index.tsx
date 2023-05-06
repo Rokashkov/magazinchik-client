@@ -2,7 +2,7 @@ import styles from './.module.sass'
 import cn from 'classnames'
 import { ComponentProps, TouchEventHandler, useRef, useState } from 'react'
 import { observer } from 'mobx-react-lite'
-import { store } from 'shared/model'
+import { store } from 'shared/model/store'
 import { CSSTransition } from 'react-transition-group'
 
 export type ContainerProps = ComponentProps<'nav'>

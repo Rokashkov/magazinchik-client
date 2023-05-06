@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
-import { store } from 'shared/model'
+import { store } from 'shared/model/store'
 
 export const initDeviceType = () => {
 	useEffect(() => {
-		store.setWindowWidth(window.innerWidth)
+		store.setDeviceType(window.innerWidth)
 	}, [])
 }

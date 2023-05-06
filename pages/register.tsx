@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { GetServerSideProps } from 'next'
-import { RegisterPage } from 'pages/auth/RegisterPage'
+import { RegisterPage } from 'pages/auth'
 
 export default RegisterPage
 

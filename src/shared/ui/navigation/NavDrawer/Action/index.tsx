@@ -2,7 +2,7 @@ import styles from './.module.sass'
 import cn from 'classnames'
 import { ComponentProps } from 'react'
 import { IconType } from 'react-icons'
-import { store } from 'shared/model'
+import { store } from 'shared/model/store'
 
 interface ActionProps extends Omit<ComponentProps<'div'>, 'children'> {
 	icon: IconType

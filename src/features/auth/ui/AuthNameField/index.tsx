@@ -1,4 +1,4 @@
-import { authStore } from 'entites/auth/model'
+import { authStore } from 'features/auth/store'
 import { TextField, TextFieldProps } from 'shared/ui/fields/TextField'
 
 type AuthNameFieldProps = Omit<TextFieldProps, 'placeholder'>

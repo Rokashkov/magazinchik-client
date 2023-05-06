@@ -1,3 +1,3 @@
-import { MainPage } from 'pages/MainPage'
+import { MainPage } from 'pages/other/MainPage'
 
 export default MainPage

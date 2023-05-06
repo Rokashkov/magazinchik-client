@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { GetServerSideProps } from 'next'
-import { LoginPage } from 'pages/auth/LoginPage'
+import { LoginPage } from 'pages/auth'
 
 export default LoginPage
 

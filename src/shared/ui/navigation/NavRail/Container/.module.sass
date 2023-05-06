@@ -12,16 +12,11 @@
 	height: 100vh
 	padding: 12px 0
 	width: var(--nav-rail-width)
-	background: var(--surface-container-lowest)
-
-	@media (min-width: v.$desktop-min-width)
-		display: none
+	background: var(--surface-container-low)
+	box-shadow: var(--elevation-low)
 
 	@media (min-width: v.$tablet-min-width) and (max-width: v.$tablet-max-width)
 		display: flex
 
-	@media (min-width: v.$mobile-min-width) and (max-width: v.$mobile-max-width)
-		display: none
-
-	@media (max-width: v.$small-max-width)
+	@media (max-width: v.$mobile-max-width)
 		display: none

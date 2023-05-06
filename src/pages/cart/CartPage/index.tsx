@@ -1,8 +1,8 @@
-import { Page } from 'shared/ui/containers/Page'
+import { Page } from 'shared/ui/other/Page'
 
 export const CartPage = () => {
 	
 	return (
-		<Page>СТраница корзины</Page>
+		<Page>Страница корзины</Page>
 	)
 }

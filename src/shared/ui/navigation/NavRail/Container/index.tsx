@@ -3,7 +3,7 @@ import cn from 'classnames'
 import { ComponentProps } from 'react'
 import { IoMenu, IoMenuOutline } from 'react-icons/io5'
 import { IconButton } from 'shared/ui/buttons/IconButton'
-import { store } from 'shared/model'
+import { store } from 'shared/model/store'
 
 export type ContainerProps = ComponentProps<'nav'>
 
