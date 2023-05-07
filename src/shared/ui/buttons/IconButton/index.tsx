@@ -6,11 +6,12 @@ import { IconType } from 'react-icons'
 interface IconButtonProps extends Omit<ComponentProps<'button'>, 'children'> {
 	iconOutline: IconType
 	iconFilled?: IconType
-	selected?: true
-	placedOn?: 'surface' | 'inverse-surface'
+	selected?: boolean
+	placedOn?: 'on-surface' | 'inverse-surface'
+	selectedColor?: 'primary' | 'error'
 }
 
-export const IconButton = ({ placedOn, iconOutline, iconFilled, type, selected, className, ...otherProps }: IconButtonProps) => {
+export const IconButton = ({ selectedColor, placedOn, iconOutline, iconFilled, type, selected, className, ...otherProps }: IconButtonProps) => {
 	const IconOutline = iconOutline
 	const IconFilled = iconFilled
 	
@@ -21,7 +22,8 @@ export const IconButton = ({ placedOn, iconOutline, iconFilled, type, selected, 
 				className,
 				styles.container,
 				styles[selected && 'selected'],
-				styles[placedOn === 'inverse-surface' && 'on-inverse-surface']
+				styles[selectedColor ?? 'primary'],
+				styles[placedOn ?? 'on-surface'],
 			) }
 			{ ...otherProps }
 		>

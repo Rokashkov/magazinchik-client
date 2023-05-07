@@ -1,3 +1,4 @@
+import { LaunchScreen } from 'shared/ui/other/LaunchScreen'
 import Layout, { LayoutProps } from 'shared/ui/other/Layout'
 import { Scrim } from 'shared/ui/other/Scrim'
 import { Snackbar } from 'shared/ui/other/Snackbar'
@@ -14,6 +15,7 @@ export const DefaultLayout = ({ children, ...otherProps }: LayoutProps) => {
 		<Layout { ...otherProps }>
 			<Snackbar/>
 			<Scrim/>
+			<LaunchScreen/>
 			<DefaultNavDrawer/>
 			<DefaultNavRail/>
 			<DefaultTopAppBar/>

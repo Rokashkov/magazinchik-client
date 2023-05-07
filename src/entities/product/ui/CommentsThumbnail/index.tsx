@@ -1,14 +1,14 @@
-import { productStore } from 'entities/product/store'
 import styles from './.module.sass'
 import cn from 'classnames'
 import { observer } from 'mobx-react-lite'
 import { ComponentProps } from 'react'
 import { IoChatbubbleOutline } from 'react-icons/io5'
 
-type CommentsThumbnailProps = ComponentProps<'div'>
+interface CommentsThumbnailProps extends ComponentProps<'div'> {
+	commentsCount: number
+}
 
-export const CommentsThumbnail = observer(({ className, ...otherProps }: CommentsThumbnailProps) => {
-	const { commentsCount } = productStore
+export const CommentsThumbnail = observer(({ commentsCount, className, ...otherProps }: CommentsThumbnailProps) => {
 
 	return (
 		<div

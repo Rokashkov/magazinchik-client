@@ -74,7 +74,7 @@ const App = observer(({ Component, pageProps, router }: AppPropsWithLayout) => {
 	}, [data])
 
 	return (
-		<AnimatePresence initial={ false }>
+		<AnimatePresence>
 			<Layout className={ cn(montserrat.className) }>
 				<Component { ...pageProps }/>
 			</Layout>

@@ -6,10 +6,8 @@ import { LoginWindow } from 'widgets/auth/LoginWindow'
 export const LoginPage = () => {
 	
 	return (
-		<Page>
-			<div className={ cn(styles.container) }>
-				<LoginWindow/>
-			</div>
+		<Page className={ cn(styles.container) }>
+			<LoginWindow/>
 		</Page>
 	)
 }

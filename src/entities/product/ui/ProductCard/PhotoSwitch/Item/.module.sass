@@ -15,9 +15,12 @@
 			outline: 1px solid var(--on-surface)
 
 	@media (max-width: 999px)
+		transition: width 0.2s ease-out
 		width: 8px
 		height: 8px
 		background: var(--outline-variant)
+
+		&:hover
 
 		&.selected
 			width: 16px

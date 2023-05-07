@@ -4,30 +4,31 @@ import cn from 'classnames'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import { ComponentProps } from 'react'
-import { switchDisplayedPhotoStore } from 'features/switch-displaeyd-photo/store'
 
 interface ItemProps extends ComponentProps<'button'> {
 	index: number
 }
 
 export const Item = observer(({ index, className, ...otherProps }: ItemProps) => {
+	const { displayedPhotoIndex, photos } = productStore
 
 	return (
 		<button
-			onClick={ () => switchDisplayedPhotoStore.setIndex(index) }
+			onClick={ () => productStore.setDisplayedPhotoIndex(index) }
 			className={ cn(
 				styles.container,
-				styles[switchDisplayedPhotoStore.index === index && 'selected'],
+				styles[displayedPhotoIndex === index && 'selected'],
 				className
 			) }
 			{ ...otherProps }
 		>
 			<Image
+				draggable={ false }
 				className={ cn(styles.photo) }
 				width={ 48 }
 				height={ 48 }
 				alt=''
-				src={ `/${ productStore.photos[index] }` }
+				src={ `/${ photos[index] }` }
 			/>
 		</button>
 	)

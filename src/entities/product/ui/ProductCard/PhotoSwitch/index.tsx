@@ -1,9 +1,9 @@
 import styles from './.module.sass'
 import cn from 'classnames'
 import { ComponentProps } from 'react'
-import { Item } from './Item'
 import { observer } from 'mobx-react-lite'
 import { productStore } from 'entities/product/store'
+import { Item } from './Item'
 
 interface PhotoSwitchProps extends ComponentProps<'div'> {}
 

@@ -1,14 +1,14 @@
 import styles from './.module.sass'
 import cn from 'classnames'
-import { productStore } from 'entities/product/store'
 import { observer } from 'mobx-react-lite'
 import { ComponentProps } from 'react'
 import { IoStar, IoStarHalf, IoStarOutline } from 'react-icons/io5'
 
-type RatingThumbnailProps = ComponentProps<'div'>
+interface RatingThumbnailProps extends ComponentProps<'div'> {
+	averageRating: number
+}
 
-export const RatingThumbnail = observer(({ className, ...otherProps }: RatingThumbnailProps) => {
-	const { averageRating } = productStore
+export const RatingThumbnail = observer(({ averageRating, className, ...otherProps }: RatingThumbnailProps) => {
 	const stars = [] as JSX.Element[]
 
 	for (let i = 0; i < 5; i++) {

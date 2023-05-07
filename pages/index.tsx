@@ -1,3 +1,4 @@
-import { MainPage } from 'pages/other/MainPage'
+import { getStaticProps, MainPage } from 'pages/other/MainPage'
 
+export { getStaticProps }
 export default MainPage

@@ -10,6 +10,7 @@ class ProductStore implements Product {
 	price = 0
 	description = 'string'
 	photos = ['string']
+	displayedPhotoIndex = 0
 
 	constructor () {
 		makeAutoObservable(this)
@@ -17,7 +18,6 @@ class ProductStore implements Product {
 
 	setProduct (product: Product) {
 		const { id, slug, name, commentsCount, averageRating, price, description, photos } = product
-
 		this.id = id
 		this.slug = slug
 		this.name = name
@@ -26,6 +26,15 @@ class ProductStore implements Product {
 		this.price = price
 		this.description = description
 		this.photos = photos ?? []
+	}
+	setDisplayedPhotoIndex (index: number) {
+		index = index % this.photos.length
+		
+		if (index >= 0) {
+			this.displayedPhotoIndex = index
+		} else {
+			this.displayedPhotoIndex = this.photos.length + index
+		}
 	}
 }
 

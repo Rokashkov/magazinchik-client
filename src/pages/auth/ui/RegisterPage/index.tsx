@@ -6,10 +6,8 @@ import { RegisterWindow } from 'widgets/auth/RegisterWindow'
 export const RegisterPage = () => {
 	
 	return (
-		<Page>
-			<div className={ cn(styles.container) }>
-				<RegisterWindow/>
-			</div>
+		<Page className={ cn(styles.container) }>
+			<RegisterWindow/>
 		</Page>
 	)
 }

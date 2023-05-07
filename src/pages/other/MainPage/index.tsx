@@ -1,17 +1,34 @@
-import { productStore } from 'entities/product/store'
-import { mockProduct } from 'entities/product/store/mock'
-import { useEffect } from 'react'
+import { GetStaticProps } from 'next'
+import { productService } from 'shared/api/sevices/productService'
+import { Product } from 'shared/api/types/Product'
 import { Page } from 'shared/ui/other/Page'
-import { ProductWidget } from 'widgets/product/ProductWidget'
+import { ProductList } from 'widgets/product/ProductList'
+import cn from 'classnames'
+import styles from './.module.sass'
 
-export const MainPage = () => {
-	useEffect(() => {
-		productStore.setProduct(mockProduct)
-	}, [])
+interface MainPageProps {
+	products: Product[]
+}
+
+export const MainPage = ({ products }: MainPageProps) => {
 
 	return (
 		<Page>
-			<ProductWidget/>
+			{ products && products.length === 0  && 'Пока в Магазинчике нет товаров' }
+			{ products && products.length > 0 && (
+				<>
+					<div className={ cn(styles.title) }>Все товары</div>
+					<ProductList products={ products }/>
+				</>
+			) }
 		</Page>
 	)
+}
+
+export const  getStaticProps: GetStaticProps<MainPageProps> = async () => {
+	const { data } = await productService.getAllProducts()
+
+	return {
+		props: { products: data }
+	}
 }

@@ -12,7 +12,10 @@
 	--on-primary-container-hovered: rgba(0, 24, 71, 0.1)
 	--on-primary-container-pressed: rgba(0, 24, 71, 0.2)
 	--on-primary-container-focused: rgba(0, 24, 71, 0.2)
-	--error: #BA1A1A
+	--error: rgb(186, 26, 26)
+	--error-hovered: rgba(186, 26, 26, 0.1)
+	--error-pressed: rgba(186, 26, 26, 0.2)
+	--error-focused: rgba(186, 26, 26, 0.2)
 	--on-error: #ffffff
 	--error-container: #FFDAD6
 	--on-error-container: #410002
@@ -43,10 +46,11 @@
 	--inverse-primary: #B2C5FF
 	--scrim: rgba(0, 0, 0, 0.5)
 
-	--own-shadow: 0 1px 2px rgba(0, 0, 0, 0.25)
-	--elevation-low: 0 2px 4px rgba(0, 0, 0, 0.25)
-	--elevation-medium: 0 2px 12px rgba(0, 0, 0, 0.25)
-	--elevation-high: 0 2px 24px rgba(0, 0, 0, 0.25)
+	--own-shadow: 0 0px 2px 1px rgba(0, 0, 0, 0.1)
+	--elevation-lowest: 0px 0px 0px rgba(0, 0, 0, 0.25), 0px 0px 0px rgba(0, 0, 0, 0.1)
+	--elevation-low: 0 2px 4px rgba(0, 0, 0, 0.25), var(--own-shadow)
+	--elevation-medium: 0 2px 8px rgba(0, 0, 0, 0.25), var(--own-shadow)
+	--elevation-high: 0 2px 12px rgba(0, 0, 0, 0.25), var(--own-shadow)
 
 	--nav-drawer-width: 320px
 	--side-sheet-width: 320px

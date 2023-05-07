@@ -6,16 +6,13 @@ import { observer } from 'mobx-react-lite'
 import { productStore } from 'entities/product/store'
 import { CommentsThumbnail } from '../CommentsThumbnail'
 import { FilledTextButton } from 'shared/ui/buttons/FilledTextButton'
+import { PhotoSwitch } from './PhotoSwitch'
+import { DisplayedPhoto } from './DisplayedPhoto'
 
-interface ProductCardProps extends ComponentProps<'div'> {
-	photoSwitch: (props: any) => JSX.Element
-	displayedPhoto: (props: any) => JSX.Element
-}
+type ProductCardProps = ComponentProps<'div'>
 
-export const ProductCard = observer(({ displayedPhoto, photoSwitch, className, ...otherProps }: ProductCardProps) => {
-	const { name, price, description } = productStore
-	const PhotoSwitch = photoSwitch
-	const DisplayedPhoto = displayedPhoto
+export const ProductCard = observer(({className, ...otherProps }: ProductCardProps) => {
+	const { name, price, description, commentsCount, averageRating } = productStore
 
 	return productStore.id && (
 		<div
@@ -30,8 +27,8 @@ export const ProductCard = observer(({ displayedPhoto, photoSwitch, className, .
 				<div className={ cn(styles.group) }>
 					<div className={ cn(styles.name) }>{ name }</div>
 					<div className={ cn(styles.stats) }>
-						<RatingThumbnail/>
-						<CommentsThumbnail/>
+						<RatingThumbnail averageRating={ averageRating }/>
+						<CommentsThumbnail commentsCount={ commentsCount }/>
 					</div>
 				</div>
 				<div className={ cn(styles.group) }>

@@ -17,19 +17,22 @@
 		.icon
 			width: 24px
 			height: 24px
+
+	&.on-surface
+		.icon
 			color: var(--on-surface-variant)
 
-	&:hover
-		.state
-			background: var(--on-surface-variant-hovered)
+		&:hover
+			.state
+				background: var(--on-surface-variant-hovered)
 
-	&:active
-		.state
-			background: var(--on-surface-variant-pressed)
+		&:active
+			.state
+				background: var(--on-surface-variant-pressed)
 
-	&:focus-visible
-		.state
-			background: var(--on-surface-variant-focused)
+		&:focus-visible
+			.state
+				background: var(--on-surface-variant-focused)
 
 	&.on-inverse-surface
 		.icon
@@ -49,20 +52,37 @@
 		
 
 	&.selected
-		.icon
-			color: var(--primary)
+		&.primary
+			.icon
+				color: var(--primary)
 
-		&:hover
-			.state
-				background: var(--primary-hovered)
+			&:hover
+				.state
+					background: var(--primary-hovered)
 
-		&:active
-			.state
-				background: var(--primary-pressed)
+			&:active
+				.state
+					background: var(--primary-pressed)
 
-		&:focus-visible
-			.state
-				background: var(--primary-focused)
+			&:focus-visible
+				.state
+					background: var(--primary-focused)
+
+		&.error
+			.icon
+				color: var(--error)
+
+			&:hover
+				.state
+					background: var(--error-hovered)
+
+			&:active
+				.state
+					background: var(--error-pressed)
+
+			&:focus-visible
+				.state
+					background: var(--error-focused)
 
 	&:disabled
 		cursor: default
