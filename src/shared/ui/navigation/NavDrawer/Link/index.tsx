@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite'
 import NextLink from 'next/link'
 import { useEffect, useState } from 'react'
 import { IconType } from 'react-icons'
-import { store } from 'shared/model/store'
+import { store } from 'shared/lib/store'
 import { NextLinkProps } from 'shared/types/NextLinkProps'
 
 interface LinkProps extends Omit<NextLinkProps, 'children'> {

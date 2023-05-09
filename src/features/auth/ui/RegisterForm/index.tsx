@@ -3,7 +3,7 @@ import { authService } from 'shared/api/sevices/authService'
 import { observer } from 'mobx-react-lite'
 import { useEffect } from 'react'
 import { useFetch } from 'shared/lib/hooks/useFetch'
-import { store } from 'shared/model/store'
+import { store } from 'shared/lib/store'
 import Form, { FormProps } from 'shared/ui/other/Form'
 
 export const RegisterForm = observer(({ children, ...otherProps }: FormProps) => {

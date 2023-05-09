@@ -3,7 +3,7 @@ import cn from 'classnames'
 import { observer } from 'mobx-react-lite'
 import { ComponentProps, useRef } from 'react'
 import { CSSTransition } from 'react-transition-group'
-import { store } from 'shared/model/store'
+import { store } from 'shared/lib/store'
 
 interface ScrimProps extends ComponentProps<'div'> {}
 

@@ -1,6 +1,6 @@
 import { AxiosError, AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
-import { store } from 'shared/model/store'
+import { store } from 'shared/lib/store'
 
 type RequestHandler<D = any> = () => Promise<AxiosResponse<D>>
 type ThenHandler<D = any> = (response: AxiosResponse<D>) => void

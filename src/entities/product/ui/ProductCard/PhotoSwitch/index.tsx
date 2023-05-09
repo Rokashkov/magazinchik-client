@@ -10,7 +10,7 @@ interface PhotoSwitchProps extends ComponentProps<'div'> {}
 export const PhotoSwitch = observer(({ className, ...otherProps }: PhotoSwitchProps) => {
 	const { photos } = productStore
 
-	return (
+	return !!photos && photos.length > 0 &&(
 		<div
 			className={ cn(styles.container, className) }
 			{ ...otherProps }

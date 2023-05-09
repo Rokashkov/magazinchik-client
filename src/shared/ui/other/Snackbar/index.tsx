@@ -3,7 +3,7 @@ import cn from 'classnames'
 import { ComponentProps } from 'react'
 import { IconButton } from '../../buttons/IconButton'
 import { IoCloseOutline } from 'react-icons/io5'
-import { store } from 'shared/model/store'
+import { store } from 'shared/lib/store'
 import { observer } from 'mobx-react-lite'
 
 interface SnackbarProps extends ComponentProps<'div'> {}

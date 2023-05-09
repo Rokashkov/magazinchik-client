@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { store } from 'shared/model/store'
+import { store } from 'shared/lib/store'
 
 export const useWindowResize = () => {
 	const resizeHandler = () => {

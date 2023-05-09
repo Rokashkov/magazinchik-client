@@ -1,8 +1,9 @@
-import { productStore } from 'entities/product/store'
+import { mockComment } from 'entities/comment/model/mock'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { productService } from 'shared/api/sevices/productService'
 import { Product } from 'shared/api/types/Product'
 import { Page } from 'shared/ui/other/Page'
+import { CommentSection } from 'widgets/comment/CommentSection'
 import { ProductWidget } from 'widgets/product/ProductWidget'
 
 interface ProductPageProps {
@@ -10,11 +11,11 @@ interface ProductPageProps {
 }
 
 export const ProductPage = ({ product }: ProductPageProps) => {
-	productStore.setProduct(product)
 	
 	return (
 		<Page>
-			<ProductWidget/>
+			<ProductWidget product={ product }/>
+			<CommentSection comments={ mockComment }/>
 		</Page>
 	)
 }
@@ -37,6 +38,7 @@ export const  getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
 export const  getStaticProps: GetStaticProps<ProductPageProps, { slug: string }> = async (context) => {
 	const { slug } = context.params
 	const { data } = await productService.getProductBySlag(slug)
+	data.photos ?? (data.photos = [])
 
 	return {
 		props: { product: data }

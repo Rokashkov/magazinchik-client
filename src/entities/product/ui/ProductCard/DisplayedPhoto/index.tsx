@@ -5,11 +5,14 @@ import { observer } from 'mobx-react-lite'
 import { ComponentProps, MouseEventHandler, TouchEventHandler, useState } from 'react'
 import { IconButton } from 'shared/ui/buttons/IconButton'
 import { IoHeart, IoHeartOutline } from 'react-icons/io5'
+import { useEffect } from 'react'
 
-type DisplayedPhotoProps = ComponentProps<'img'> 
+interface DisplayedPhotoProps extends ComponentProps<'img'>  {
+	photos: string[]
+}
 
-export const DisplayedPhoto = observer(({ className, ...otherProps }: DisplayedPhotoProps) => {
-	const { displayedPhotoIndex, photos } = productStore
+export const DisplayedPhoto = observer(({ photos, className, ...otherProps }: DisplayedPhotoProps) => {
+	const { displayedPhotoIndex } = productStore
 	const [touchStart, setTouchStart] = useState(0)
 	const [touchEnd, setTouchEnd] = useState(0)
 	const [clickStart, setClickStart] = useState(0)
@@ -24,6 +27,10 @@ export const DisplayedPhoto = observer(({ className, ...otherProps }: DisplayedP
 	const handleTouchMove: TouchEventHandler = (e) => {
 		setTouchEnd(e.targetTouches[0].clientX)
 	}
+
+	useEffect(() => {
+		productStore.setPhotosLength(photos.length)
+	}, [photos.length])
 
 	const handleTouchEnd: TouchEventHandler = () => {
 		if (touchStart && touchEnd) {
