@@ -10,7 +10,7 @@ import { IconButton } from 'shared/ui/buttons/IconButton'
 import { IoHeart, IoHeartOutline } from 'react-icons/io5'
 import { useState } from 'react'
 
-interface ProductShortcutProps extends Omit<NextLinkProps, 'href'> {
+interface ProductShortcutProps extends Omit<NextLinkProps, 'href' | 'dragable'> {
 	product: Product
 }
 
@@ -22,6 +22,7 @@ export const ProductShortcut = ({ product, className, ...otherProps }: ProductSh
 		<Link
 			className={ cn(styles.container, className) }
 			href={ `/product/${ slug }` }
+			draggable={ false }
 			{ ...otherProps }
 		>
 			<IconButton
@@ -45,7 +46,7 @@ export const ProductShortcut = ({ product, className, ...otherProps }: ProductSh
 					className={ cn(styles.photo) }
 				/>
 			) }
-			{ !photos && (
+			{ (!photos || !photos.length) && (
 				<div className={ cn(styles.placeholder) }/>
 			) }
 			<div className={ cn(styles.content) }>

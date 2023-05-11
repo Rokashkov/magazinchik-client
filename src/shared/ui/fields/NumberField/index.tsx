@@ -3,18 +3,18 @@ import cn from 'classnames'
 import { ComponentProps, useEffect, useRef, useState } from 'react'
 import { IoAlertCircle } from 'react-icons/io5'
 
-export interface TextFieldProps extends ComponentProps<'input'> {
+export interface NumberFieldProps extends Omit<ComponentProps<'input'>, 'type'>{
 	invalid?: boolean
 	errorMessage?: string
 	supportingText?: string
 }
 
-export const TextField = ({
-	supportingText, errorMessage, invalid, type, placeholder,
+export const NumberField = ({
+	supportingText, errorMessage, invalid, placeholder,
 	defaultValue, className, value,
 	onFocus, onBlur, onChange, onMouseEnter, onMouseLeave,
 	...otherProps
-}: TextFieldProps) => {
+}: NumberFieldProps) => {
 	const [isFocused, setIsFocused] = useState(false)
 	const [text, setText] = useState(defaultValue ?? '')
 	const [isInvaild, setIsInvaild] = useState(invalid)
@@ -46,7 +46,6 @@ export const TextField = ({
 					isHovered && setIsHovered(false)
 					onMouseLeave && onMouseLeave(e)
 				} }
-				type={ type ?? 'text' }
 				onFocus={ (e) => {
 					setIsFocused(true)
 					isHovered && setIsHovered(false)
@@ -59,9 +58,23 @@ export const TextField = ({
 				className={ cn(styles.input, className) }
 				{ ...otherProps }
 				onChange={ (e) => {
-					setText(e.currentTarget.value)
-					onChange && onChange(e)
-					isInvaild && setIsInvaild(false)
+					const cleanValue = e.target.value.replace(/\D/, '')
+					
+					if (Number.isInteger(Number(cleanValue))) {
+						if (cleanValue && cleanValue[0] !== '0') {
+							e.target.value = cleanValue
+							setText(cleanValue)
+							onChange && onChange(e)
+							isInvaild && setIsInvaild(false)
+						} else if (!cleanValue || cleanValue[0] === '0') {
+							e.target.value = '1'
+							setText('1')
+							onChange && onChange(e)
+							isInvaild && setIsInvaild(false)
+						}
+					} else {
+						e.preventDefault()
+					}
 				} }
 				value={ text }
 			/>
@@ -69,7 +82,7 @@ export const TextField = ({
 				<div
 					className={ cn(
 						styles.placeholder,
-						styles[(isFocused || !!text) && 'populated']
+						styles[(isFocused || !!value) && 'populated']
 					) }
 					onMouseEnter={ () => ref.current !== document.activeElement && setIsHovered(true) }
 					onMouseLeave={ () => setIsHovered(false) }

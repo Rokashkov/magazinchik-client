@@ -12,11 +12,12 @@ export interface PasswordFieldProps extends Omit<ComponentProps<'input'>, 'type'
 
 export const PasswordField = ({
 	supportingText, errorMessage, invalid, placeholder,
+	defaultValue, className, value,
 	onFocus, onBlur, onChange, onMouseEnter, onMouseLeave,
 	...otherProps
 }: PasswordFieldProps) => {
 	const [isFocused, setIsFocused] = useState(false)
-	const [value, setValue] = useState('')
+	const [text, setText] = useState(defaultValue)
 	const [isInvalid, setIsInvalid] = useState(invalid)
 	const [isHovered, setIsHovered] = useState(false)
 	const [isTextVisible, setIsTextVisible] = useState(false)
@@ -25,6 +26,10 @@ export const PasswordField = ({
 	useEffect(() => {
 		setIsInvalid(invalid)
 	}, [invalid, errorMessage])
+
+	useEffect(() => {
+		setText(value)
+	}, [value])
 	
 	return (
 		<div className={ cn(
@@ -53,19 +58,19 @@ export const PasswordField = ({
 					setIsFocused(false)
 					onBlur && onBlur(e)
 				} }
-				className={ cn(styles.input) }
+				className={ cn(styles.input, className) }
 				{ ...otherProps }
 				onChange={ (e) => {
-					setValue(e.currentTarget.value)
+					setText(e.currentTarget.value)
 					onChange && onChange(e)
 					isInvalid && setIsInvalid(false)
 				} }
-				value={ value }
+				value={ text }
 			/>
 			<div
 				className={ cn(
 					styles.placeholder,
-					styles[(isFocused || !!value) && 'populated']
+					styles[(isFocused || !!text) && 'populated']
 				) }
 				onMouseEnter={ () => ref.current !== document.activeElement && setIsHovered(true) }
 				onMouseLeave={ () => setIsHovered(false) }
