@@ -4,13 +4,17 @@ import { ComponentProps } from 'react'
 import { IoPersonCircleOutline } from 'react-icons/io5'
 import { Comment } from 'shared/api/types/Comment'
 import { RateThumbnail } from './RateThumbnail'
+import moment from 'moment'
+import 'moment/locale/ru'
 
 interface CommentCardProps extends ComponentProps<'div'> {
 	comment: Comment
 }
 
 export const CommentCard = ({ comment, className, ...otherProps }: CommentCardProps) => {
-	const { userName, text, rate } = comment
+	const { userName, text, created } = comment
+	console.log(comment)
+	moment.locale('ru')
 
 	return (
 		<div
@@ -22,8 +26,8 @@ export const CommentCard = ({ comment, className, ...otherProps }: CommentCardPr
 				<div className={ cn(styles.head) }>
 					<div className={ cn(styles.author) }>{ userName }</div>
 					<div className={ cn(styles.stats) }>
-						<RateThumbnail rate={ rate }/>
-						<div className={ cn(styles.date) }>8 мая 2023</div>
+						{/* <RateThumbnail rate={ 0 }/> */}
+						<div className={ cn(styles.date) }>{ moment(created).locale('rus').fromNow() }</div>
 					</div>
 				</div>
 				<div className={ cn(styles.text) }>{ text }</div>

@@ -1,7 +1,9 @@
-import { mockComment } from 'entities/comment/model/mock'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import { useEffect } from 'react'
+import { commentService } from 'shared/api/sevices/commentService'
 import { productService } from 'shared/api/sevices/productService'
 import { Product } from 'shared/api/types/Product'
+import { useFetch } from 'shared/lib/hooks/useFetch'
 import { Page } from 'shared/ui/other/Page'
 import { CommentSection } from 'widgets/comment/CommentSection'
 import { ProductWidget } from 'widgets/product/ProductWidget'
@@ -11,11 +13,16 @@ interface ProductPageProps {
 }
 
 export const ProductPage = ({ product }: ProductPageProps) => {
+	const { data, fetch } = useFetch(() => commentService.getAllCommentsByProductId(product.id))
 	
+	useEffect(() => {
+		fetch()
+	}, [])
+
 	return (
 		<Page>
 			<ProductWidget product={ product }/>
-			<CommentSection comments={ mockComment }/>
+			{ data && <CommentSection comments={ data }/> }
 		</Page>
 	)
 }

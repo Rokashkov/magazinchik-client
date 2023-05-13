@@ -3,7 +3,6 @@ export interface Comment {
 	productName: string
 	productSlug: string
 	text: string
-	rate: number
-	createdAt: number
-	updatedAt: number
+	created: string
+	updated: string
 }

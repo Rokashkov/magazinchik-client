@@ -15,7 +15,7 @@ export const CommentSection = ({ comments, className, ...otherProps }: CommentSe
 			className={ cn(styles.container, className) }
 			{ ...otherProps }
 		>
-			<div className={ cn(styles.title) }>Отзывы о товаре <span>10</span></div>
+			<div className={ cn(styles.title) }>Отзывы о товаре<span>{ comments.length }</span></div>
 			<div className={ cn(styles.group) }>
 				{ comments.map(comment => {
 					const key = comments.indexOf(comment)

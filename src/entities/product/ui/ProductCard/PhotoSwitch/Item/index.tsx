@@ -2,15 +2,15 @@ import { productStore } from 'entities/product/store'
 import styles from './.module.sass'
 import cn from 'classnames'
 import { observer } from 'mobx-react-lite'
-import Image from 'next/image'
 import { ComponentProps } from 'react'
 
 interface ItemProps extends ComponentProps<'button'> {
 	index: number
+	photos: string[]
 }
 
-export const Item = observer(({ index, className, ...otherProps }: ItemProps) => {
-	const { displayedPhotoIndex, photos } = productStore
+export const Item = observer(({ photos, index, className, ...otherProps }: ItemProps) => {
+	const { displayedPhotoIndex } = productStore
 
 	return (
 		<button
@@ -22,13 +22,11 @@ export const Item = observer(({ index, className, ...otherProps }: ItemProps) =>
 			) }
 			{ ...otherProps }
 		>
-			<Image
+			<img
 				draggable={ false }
 				className={ cn(styles.photo) }
-				width={ 48 }
-				height={ 48 }
 				alt=''
-				src={ `/${ photos[index] }` }
+				src={ `${ process.env.NEXT_PUBLIC_API_URL }/product_photo/${ photos[index] }` }
 			/>
 		</button>
 	)

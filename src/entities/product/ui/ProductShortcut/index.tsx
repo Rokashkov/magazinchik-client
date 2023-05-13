@@ -42,7 +42,7 @@ export const ProductShortcut = ({ product, className, ...otherProps }: ProductSh
 					loading='lazy'
 					draggable='false'
 					alt=''
-					src={ `/${ photos[0] }` }
+					src={ `${ process.env.NEXT_PUBLIC_API_URL }/product_photo/${ photos[0] }` }
 					className={ cn(styles.photo) }
 				/>
 			) }

@@ -22,7 +22,7 @@ export const ProductCard = observer(({ product, className, ...otherProps }: Prod
 			{ ...otherProps }
 		>
 			<div className={ cn(styles.photos) }>
-				<PhotoSwitch/>
+				<PhotoSwitch photos={ photos }/>
 				<DisplayedPhoto photos={ photos }/>
 			</div>
 			<div className={ cn(styles.info) }>

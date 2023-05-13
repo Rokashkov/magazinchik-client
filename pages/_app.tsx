@@ -1,6 +1,6 @@
 import { AppPropsWithLayout } from 'shared/types/AppPropsWithLayout'
 import React, { useEffect } from 'react'
-import { Montserrat_Alternates } from 'next/font/google'
+import { Montserrat } from 'next/font/google'
 import { observer } from 'mobx-react-lite'
 import { store } from 'shared/lib/store'
 import { initDeviceType } from 'shared/lib/hooks/initDeviceType'
@@ -21,7 +21,7 @@ if (typeof window === 'undefined') {
 	React.useLayoutEffect = null
 }
 
-const montserrat = Montserrat_Alternates({
+const montserrat = Montserrat({
 	subsets: ['latin', 'cyrillic'],
 	weight: ['400', '500', '600']
 })

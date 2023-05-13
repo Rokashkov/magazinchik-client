@@ -35,9 +35,9 @@ export const DisplayedPhoto = observer(({ photos, className, ...otherProps }: Di
 	const handleTouchEnd: TouchEventHandler = () => {
 		if (touchStart && touchEnd) {
 			if (touchStart - touchEnd > 100) {
-				productStore.setDisplayedPhotoIndex(displayedPhotoIndex - 1)
-			} else if (touchEnd - touchStart > 100) {
 				productStore.setDisplayedPhotoIndex(displayedPhotoIndex + 1)
+			} else if (touchEnd - touchStart > 100) {
+				productStore.setDisplayedPhotoIndex(displayedPhotoIndex - 1)
 			}
 
 			setTouchStart(0)
@@ -57,9 +57,9 @@ export const DisplayedPhoto = observer(({ photos, className, ...otherProps }: Di
 	const handleClickEnd: MouseEventHandler = () => {
 		if (clickStart && clickEnd) {
 			if (clickStart - clickEnd > 100) {
-				productStore.setDisplayedPhotoIndex(displayedPhotoIndex - 1)
-			} else if (clickEnd - clickStart > 100) {
 				productStore.setDisplayedPhotoIndex(displayedPhotoIndex + 1)
+			} else if (clickEnd - clickStart > 100) {
+				productStore.setDisplayedPhotoIndex(displayedPhotoIndex - 1)
 			}
 
 			setClickStart(0)
@@ -80,8 +80,7 @@ export const DisplayedPhoto = observer(({ photos, className, ...otherProps }: Di
 				} }
 				onClick={ () => setIsSelected(!isSelected) }
 			/>
-			{ photos.length === 0  && <div className={ cn(styles.placeholder) }/> }
-			{ photos.length > 0 && (
+			{ photos && photos.length !== 0 && (
 				<img
 					loading='lazy'
 					draggable={ false }
@@ -93,10 +92,13 @@ export const DisplayedPhoto = observer(({ photos, className, ...otherProps }: Di
 					onMouseLeave={ handleClickEnd }
 					onMouseUp={ handleClickEnd }
 					alt=''
-					src={ `/${ photos[displayedPhotoIndex] }` }
+					src={ `${ process.env.NEXT_PUBLIC_API_URL }/product_photo/${ photos[displayedPhotoIndex] }` }
 					className={ cn(styles.photo, className) }
 					{ ...otherProps }
 				/>
+			) }
+			{ (!photos || !photos.length) && (
+				<div className={ cn(styles.placeholder) }/>
 			) }
 		</div>
 	)
